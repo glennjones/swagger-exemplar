@@ -1,6 +1,6 @@
 {
   "name": "swagger-exemplar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A module that builds a exemplar JSON objects from OpenAPI (aka swagger) schema objects.",
   "main": "index.js",
   "scripts": {
