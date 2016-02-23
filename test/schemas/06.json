@@ -1,0 +1,34 @@
+{
+    "properties": {
+        "a": {
+            "type": "number",
+            "description": "the first number"
+        },
+        "b": {
+            "type": "number",
+            "description": "the second number"
+        },
+        "operator": {
+            "default": "+",
+            "type": "string",
+            "enum": [
+                "+",
+                "-",
+                "/",
+                "*"
+            ],
+            "description": "the opertator i.e. + - / or *"
+        },
+        "equals": {
+            "type": "number",
+            "description": "the result of the sum"
+        }
+    },
+    "required": [
+        "a",
+        "b",
+        "operator",
+        "equals"
+    ],
+    "type": "object"
+}

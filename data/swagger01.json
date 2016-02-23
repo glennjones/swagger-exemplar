@@ -1,0 +1,998 @@
+{
+    "info": {
+        "title": "API documentation"
+    },
+    "basePath": "/",
+    "tags": [],
+    "paths": {
+        "/v1/store/": {
+            "get": {
+                "summary": "List sums",
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "default": "decimal",
+                        "name": "x-format",
+                        "type": "string",
+                        "enum": [
+                            "decimal",
+                            "binary"
+                        ],
+                        "description": "return result as decimal or binary"
+                    },
+                    {
+                        "example": 1,
+                        "in": "query",
+                        "name": "page",
+                        "type": "number",
+                        "description": "the page number"
+                    },
+                    {
+                        "example": 10,
+                        "in": "query",
+                        "name": "pagesize",
+                        "type": "number",
+                        "description": "the number of items to a page"
+                    }
+                ],
+                "operationId": "v1store",
+                "description": "List the sums in the data store",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "items": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "example": "x78P9c",
+                                                "type": "string"
+                                            },
+                                            "a": {
+                                                "example": 5,
+                                                "type": "number"
+                                            },
+                                            "b": {
+                                                "example": 5,
+                                                "type": "number"
+                                            },
+                                            "operator": {
+                                                "example": "+",
+                                                "type": "string",
+                                                "description": "either +, -, /, or *"
+                                            },
+                                            "equals": {
+                                                "example": 10,
+                                                "type": "number"
+                                            },
+                                            "created": {
+                                                "example": "2015-12-01",
+                                                "type": "string",
+                                                "description": "ISO date string"
+                                            },
+                                            "modified": {
+                                                "example": "2015-12-01",
+                                                "type": "string",
+                                                "description": "ISO date string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "a",
+                                            "b",
+                                            "operator",
+                                            "equals",
+                                            "created"
+                                        ],
+                                        "type": "object"
+                                    }
+                                },
+                                "count": {
+                                    "example": "1",
+                                    "type": "number"
+                                },
+                                "pageSize": {
+                                    "example": "10",
+                                    "type": "number"
+                                },
+                                "page": {
+                                    "example": "1",
+                                    "type": "number"
+                                },
+                                "pageCount": {
+                                    "example": "1",
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "count",
+                                "pageSize",
+                                "page",
+                                "pageCount"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Sum not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add sum",
+                "operationId": "v1store",
+                "description": "Adds a sum to the data store",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "default": 10,
+                        "name": "a",
+                        "required": true,
+                        "type": "number",
+                        "description": "the first number"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "b",
+                        "required": true,
+                        "type": "number",
+                        "description": "the second number"
+                    },
+                    {
+                        "in": "formData",
+                        "default": "+",
+                        "name": "operator",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "+",
+                            "-",
+                            "/",
+                            "*"
+                        ],
+                        "description": "the opertator i.e. + - / or *"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "equals",
+                        "required": true,
+                        "type": "number",
+                        "description": "the result of the sum"
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "tags": [
+                    "v1"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "description": "json body for sum",
+                            "properties": {
+                                "id": {
+                                    "example": "x78P9c",
+                                    "type": "string"
+                                },
+                                "a": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "b": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "operator": {
+                                    "example": "+",
+                                    "type": "string",
+                                    "description": "either +, -, /, or *"
+                                },
+                                "equals": {
+                                    "example": 10,
+                                    "type": "number"
+                                },
+                                "created": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                },
+                                "modified": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "a",
+                                "b",
+                                "operator",
+                                "equals",
+                                "created"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/store/{id}": {
+            "get": {
+                "summary": "Get sum",
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "the id of the sum in the store"
+                    }
+                ],
+                "operationId": "v1storeid",
+                "description": "Get a sum from the store",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "description": "json body for sum",
+                            "properties": {
+                                "id": {
+                                    "example": "x78P9c",
+                                    "type": "string"
+                                },
+                                "a": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "b": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "operator": {
+                                    "example": "+",
+                                    "type": "string",
+                                    "description": "either +, -, /, or *"
+                                },
+                                "equals": {
+                                    "example": 10,
+                                    "type": "number"
+                                },
+                                "created": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                },
+                                "modified": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "a",
+                                "b",
+                                "operator",
+                                "equals",
+                                "created"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update sum",
+                "tags": [
+                    "v1"
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "the id of the sum in the store"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "a",
+                        "required": true,
+                        "type": "number",
+                        "description": "the first number"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "b",
+                        "required": true,
+                        "type": "number",
+                        "description": "the second number"
+                    },
+                    {
+                        "in": "formData",
+                        "default": "+",
+                        "name": "operator",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "+",
+                            "-",
+                            "/",
+                            "*"
+                        ],
+                        "description": "the opertator i.e. + - / or *"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "equals",
+                        "required": true,
+                        "type": "number",
+                        "description": "the result of the sum"
+                    }
+                ],
+                "operationId": "v1storeid",
+                "description": "Update a sum in our data store",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "description": "json body for sum",
+                            "properties": {
+                                "id": {
+                                    "example": "x78P9c",
+                                    "type": "string"
+                                },
+                                "a": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "b": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "operator": {
+                                    "example": "+",
+                                    "type": "string",
+                                    "description": "either +, -, /, or *"
+                                },
+                                "equals": {
+                                    "example": 10,
+                                    "type": "number"
+                                },
+                                "created": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                },
+                                "modified": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "a",
+                                "b",
+                                "operator",
+                                "equals",
+                                "created"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete sums",
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "description": "the id of the sum in the store"
+                    }
+                ],
+                "operationId": "v1storeid",
+                "description": "Delete a sums from the data store",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "description": "json body for sum",
+                            "properties": {
+                                "id": {
+                                    "example": "x78P9c",
+                                    "type": "string"
+                                },
+                                "a": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "b": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "operator": {
+                                    "example": "+",
+                                    "type": "string",
+                                    "description": "either +, -, /, or *"
+                                },
+                                "equals": {
+                                    "example": 10,
+                                    "type": "number"
+                                },
+                                "created": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                },
+                                "modified": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "a",
+                                "b",
+                                "operator",
+                                "equals",
+                                "created"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/sum/add/{a}/{b}": {
+            "put": {
+                "summary": "Add",
+                "tags": [
+                    "v1"
+                ],
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "a",
+                        "required": true,
+                        "type": "number",
+                        "description": "the first number"
+                    },
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "b",
+                        "required": true,
+                        "type": "number",
+                        "description": "the second number"
+                    }
+                ],
+                "operationId": "v1sumaddab",
+                "description": "Adds together two numbers and return the result. As an option you can have the result return as a binary number.",
+                "responses": {
+                    "default": {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Successful"
+                    }
+                }
+            }
+        },
+        "/v1/sum/divide/{a}/{b}": {
+            "put": {
+                "summary": "Divide",
+                "x-order": 3,
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "a",
+                        "required": true,
+                        "type": "number",
+                        "description": "the first number - can NOT be 0"
+                    },
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "b",
+                        "required": true,
+                        "type": "number",
+                        "description": "the second number - can NOT be 0"
+                    }
+                ],
+                "operationId": "v1sumdivideab",
+                "description": "Divides the first number by the second and return the result",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "equals": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Sum not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/v1/sum/multiple/{a}/{b}": {
+            "put": {
+                "summary": "Multiple",
+                "x-order": 2,
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "a",
+                        "required": true,
+                        "type": "number",
+                        "description": "the first number"
+                    },
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "b",
+                        "required": true,
+                        "type": "number",
+                        "description": "the second number"
+                    }
+                ],
+                "operationId": "v1summultipleab",
+                "description": "Multiples the two numbers together and return the result",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "equals": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Sum not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/v1/sum/subtract/{a}/{b}": {
+            "put": {
+                "summary": "Subtract",
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "a",
+                        "required": true,
+                        "type": "number",
+                        "description": "the first number"
+                    },
+                    {
+                        "example": "5",
+                        "in": "path",
+                        "name": "b",
+                        "required": true,
+                        "type": "number",
+                        "description": "the second number"
+                    }
+                ],
+                "operationId": "v1sumsubtractab",
+                "description": "Subtracts the second number from the first and return the result",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "equals": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Sum not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/v1/store/file/": {
+            "post": {
+                "deprecated": true,
+                "summary": "Add sum, with JSON file",
+                "tags": [
+                    "v1"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "file",
+                        "required": true,
+                        "type": "file",
+                        "description": "json file with object containing: a, b, operator and equals"
+                    }
+                ],
+                "operationId": "v1storefile",
+                "description": "Adds a sum to the data store, using JSON object in a uploaded file",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "description": "json body for sum",
+                            "properties": {
+                                "id": {
+                                    "example": "x78P9c",
+                                    "type": "string"
+                                },
+                                "a": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "b": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "operator": {
+                                    "example": "+",
+                                    "type": "string",
+                                    "description": "either +, -, /, or *"
+                                },
+                                "equals": {
+                                    "example": 10,
+                                    "type": "number"
+                                },
+                                "created": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                },
+                                "modified": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "a",
+                                "b",
+                                "operator",
+                                "equals",
+                                "created"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Unsupported Media Type"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/v1/store/payload/": {
+            "post": {
+                "summary": "Add sum, with JSON object",
+                "tags": [
+                    "v1"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "properties": {
+                                "a": {
+                                    "type": "number",
+                                    "description": "the first number"
+                                },
+                                "b": {
+                                    "type": "number",
+                                    "description": "the second number"
+                                },
+                                "operator": {
+                                    "default": "+",
+                                    "type": "string",
+                                    "enum": [
+                                        "+",
+                                        "-",
+                                        "/",
+                                        "*"
+                                    ],
+                                    "description": "the opertator i.e. + - / or *"
+                                },
+                                "equals": {
+                                    "type": "number",
+                                    "description": "the result of the sum"
+                                }
+                            },
+                            "required": [
+                                "a",
+                                "b",
+                                "operator",
+                                "equals"
+                            ],
+                            "type": "object"
+                        },
+                        "in": "body",
+                        "name": "body"
+                    }
+                ],
+                "operationId": "v1storepayload",
+                "description": "Adds a sum to the data store, using JSON object in payload",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "description": "json body for sum",
+                            "properties": {
+                                "id": {
+                                    "example": "x78P9c",
+                                    "type": "string"
+                                },
+                                "a": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "b": {
+                                    "example": 5,
+                                    "type": "number"
+                                },
+                                "operator": {
+                                    "example": "+",
+                                    "type": "string",
+                                    "description": "either +, -, /, or *"
+                                },
+                                "equals": {
+                                    "example": 10,
+                                    "type": "number"
+                                },
+                                "created": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                },
+                                "modified": {
+                                    "example": "2015-12-01",
+                                    "type": "string",
+                                    "description": "ISO date string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "a",
+                                "b",
+                                "operator",
+                                "equals",
+                                "created"
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "number"
+                                },
+                                "msg": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "swagger": "2.0",
+    "schemes": [
+        "http"
+    ],
+    "host": "localhost:3007"
+}

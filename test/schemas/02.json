@@ -1,0 +1,45 @@
+{
+    "type": "object",
+    "description": "json body for sum",
+    "properties": {
+        "id": {
+            "example": "x78P9c",
+            "type": "string"
+        },
+        "a": {
+            "example": 5,
+            "type": "number"
+        },
+        "b": {
+            "example": 5,
+            "type": "number"
+        },
+        "operator": {
+            "example": "+",
+            "type": "string",
+            "description": "either +, -, /, or *"
+        },
+        "equals": {
+            "example": 10,
+            "type": "number"
+        },
+        "created": {
+            "example": "2015-12-01",
+            "type": "string",
+            "description": "ISO date string"
+        },
+        "modified": {
+            "example": "2015-12-01",
+            "type": "string",
+            "description": "ISO date string"
+        }
+    },
+    "required": [
+        "id",
+        "a",
+        "b",
+        "operator",
+        "equals",
+        "created"
+    ]
+}
