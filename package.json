@@ -1,6 +1,6 @@
 {
   "name": "swagger-exemplar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A module that builds a exemplar JSON objects from OpenAPI (aka swagger) schema objects.",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
   "author": "Glenn Jones <glennjonesnet@gmail.com> (http://glennjones.net/)",
   "license": "MIT",
   "dependencies": {
-    "hoek": "^3.0.4",
-    "joi": "7.2.3"
+    "@hapi/hoek": "^9.0.2",
+    "@hapi/joi": "^17.1.0"
   },
   "devDependencies": {
     "blipp": "^2.3.0",
